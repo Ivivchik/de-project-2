@@ -15,8 +15,8 @@ INSERT INTO public.shipping_agreement(agreementid,
      SELECT DISTINCT 
             t[1]::INTEGER,
             t[2],
-            t[3]::DOUBLE PRECISION,
-            t[4]::DOUBLE PRECISION
+            t[3]::NUMERIC(14, 3),
+            t[4]::NUMERIC(14, 3)
        FROM 
             (SELECT REGEXP_SPLIT_TO_ARRAY(vendor_agreement_description, ':') AS t
                FROM shipping) g;
@@ -29,7 +29,7 @@ INSERT INTO public.shipping_transfer(transfer_type,
      SELECT DISTINCT
             t[1],
             t[2],
-            shipping_transfer_rate::DOUBLE PRECISION
+            shipping_transfer_rate::NUMERIC(14, 3)
        FROM 
             (SELECT shipping_transfer_rate,
                     REGEXP_SPLIT_TO_ARRAY(shipping_transfer_description, ':') AS t

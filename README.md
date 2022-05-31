@@ -15,7 +15,7 @@
 >is_delay|smallint|CHECK (is_delay IS NOT NULL AND is_delay IN (1, 0))|Статус, показывающий просрочена ли доставка
 >is_shipping_finish|smallint|CHECK (is_shipping_finish IS NOT NULL AND is_shipping_finish IN (1, 0))|Статус, показывающий, что доставка завершена
 >delay_day_at_shipping|integer|-|Количество дней, на которые была просрочена доставка.
->payment_amount|double precision|-|Сумма платежа пользователя
+>payment_amount|numeric(14, 3)|-|Сумма платежа пользователя
 >vat|double precision|-|Итоговый налог на доставку
 >profit|double precision|-|Итоговый доход компании с доставки
 
@@ -48,7 +48,7 @@
 >---|---|---|---
 >id|serial|primary key|Идентификатор страны
 >shipping_country|text|-|Страна доставки
->shipping_country_base_rate|double precision|-|Налог на доставку в страну
+>shipping_country_base_rate|numeric(14, 3)|-|Налог на доставку в страну
 
  - ## **public.shipping_agreement**
 
@@ -56,8 +56,8 @@
 >---|---|---|---
 >agreementid|integer|primary key|Идентификатор договора
 >agreement_number|text|-|Номер договора в бухгалтерии
->agreement_rate|double precision|-|Ставка налога за стоимость доставки товара для вендора
->agreement_commission|double precision|-|Комиссия, то есть доля в платеже являющаяся доходом компании от сделки
+>agreement_rate|numeric(14, 3)|-|Ставка налога за стоимость доставки товара для вендора
+>agreement_commission|numeric(14, 3)|-|Комиссия, то есть доля в платеже являющаяся доходом компании от сделки
 
  - ## **public.shipping_transfer**
 
@@ -66,7 +66,7 @@
 >id|serial|primary key|Идентификатор договора
 >transfer_type|text|-|Тип доставки. 1p означает, что компания берёт ответственность за доставку на себя, 3p — что за отправку ответственен вендор
 >transfer_model|text|-|Cпособ, которым заказ доставляется до точки
->shipping_transfer_rate|double precision|-|Процент стоимости доставки для вендора в зависимости от типа и модели доставки, который взимается интернет-магазином для покрытия расходов
+>shipping_transfer_rate|numeric(14, 3)|-|Процент стоимости доставки для вендора в зависимости от типа и модели доставки, который взимается интернет-магазином для покрытия расходов
 
  - ## **public.shipping_info**
 
@@ -74,7 +74,7 @@
 >---|---|---|---
 >shippingid|bigint|primary key|Идентификатор доставки
 >vendorid|bigint|-|Идентификатор вендора
->payment_amount|double precision|-|Сумма платежа пользователя
+>payment_amount|numeric(14, 3)|-|Сумма платежа пользователя
 >shipping_plan_datetime|timestamp|-|Плановая дата доставки
 >transfer_type_id|bigint|foreign key (transfer_type_id) references public.shipping_transfer(id) ON UPDATE cascade|Идентификатор типа доставки
 >shipping_country_id|bigint|foreign key (shipping_country_id) references public.>shipping_country_rates(id) ON UPDATE cascade|Идентификатор страны доставки

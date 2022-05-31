@@ -8,7 +8,7 @@ CREATE TABLE public.shipping_datamart(
     is_delay                SMALLINT,
     is_shipping_finish      SMALLINT,
     delay_day_at_shipping   INTEGER,
-    payment_amount          DOUBLE PRECISION,
+    payment_amount          NUMERIC(14, 3),
     vat                     DOUBLE PRECISION,
     profit                  DOUBLE PRECISION,
                             CHECK (is_delay IS NOT NULL AND is_delay IN (1, 0)),
